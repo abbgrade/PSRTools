@@ -6,7 +6,6 @@ environment:
 
 image:
  - Visual Studio 2017
- - Ubuntu
 
 install:
   - ps: Install-Module InvokeBuild -Scope CurrentUser -Force
