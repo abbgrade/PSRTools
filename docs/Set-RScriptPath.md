@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-RScriptPath
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Set Rscript path
 
 ## SYNTAX
 
@@ -17,21 +17,22 @@ Set-RScriptPath [-Path] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Configures the path to Rscript.exe as preparation for other commands.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### BEISPIEL 1
+```
+Set-RScriptPath -Path 'C:\Program Files\Microsoft\R Open\R-3.5.2\bin\x64\Rscript.exe'
 ```
 
-{{ Add example description here }}
+PS C:\\\> $version = Get-RVersion
+R scripting front-end version 3.5.2 (2018-12-20)
 
 ## PARAMETERS
 
 ### -Path
-{{ Fill Path Description }}
+Specifies the path to Rscript.exe to be used by other commands.
 
 ```yaml
 Type: String
@@ -39,7 +40,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -50,11 +51,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Keine
-
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
