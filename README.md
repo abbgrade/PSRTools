@@ -1,5 +1,7 @@
 # PSRTools
 
+[![Build status](https://ci.appveyor.com/api/projects/status/wprgefs7vsaug8sv?svg=true)](https://ci.appveyor.com/project/abbgrade/psrtools)
+
 ## Build
 
 This project uses a [build script](./PSRTools.build.ps1) that is based on [Invoke-Build](https://github.com/nightroman/Invoke-Build).
