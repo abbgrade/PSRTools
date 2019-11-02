@@ -6,6 +6,7 @@
 
 This project uses a [build script](./PSRTools.build.ps1) that is based on [Invoke-Build](https://github.com/nightroman/Invoke-Build).
 For installation details see the instructions from the Invoke-Build project, but we recommend `Install-Module InvokeBuild -Scope CurrentUser`.
+The documentation is based on [platyPS](https://github.com/PowerShell/platyPS), so you may want to execute `Install-Module PlatyPs -Scope CurrentUser`.
 
 You can run the build by:
 
@@ -16,6 +17,7 @@ You can run the build by:
 
 This project uses test scripts using [Pester](https://github.com/pester/Pester).
 For installation details see the instructions from the Pester project, but we recommend `Install-Module Pester -Scope CurrentUser`.
+The tests depend on the default installation of Microsoft R Open, that can be installed by `choco install microsoft-r-open`.
 
 You can run the tests by:
 
