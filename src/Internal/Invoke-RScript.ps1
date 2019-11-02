@@ -19,7 +19,9 @@ function Invoke-RScript {
         [Parameter(Mandatory=$true)]
         [ValidateNotNull()]
         [int]
-        $Timeout
+        $Timeout,
+
+        [switch] $ParseOutput
     )
 
     if ( -not $RScriptPath ) {
@@ -28,10 +30,15 @@ function Invoke-RScript {
         Write-Error 'Path to Rscript.exe is invalid. Please re-run Set-RScriptPath.'
     }
 
+    $arguments = $ArgumentList | ForEach-Object {
+        Write-Output '-e'
+        Write-Output $_
+    }
+
     # Configure process
     $process = New-Object System.Diagnostics.Process
     $process.StartInfo.Filename = $RScriptPath
-    $process.StartInfo.Arguments = $ArgumentList
+    $process.StartInfo.Arguments = $arguments
     $process.StartInfo.RedirectStandardOutput = $true
     $process.StartInfo.RedirectStandardError = $true
     $process.StartInfo.UseShellExecute = $false
@@ -74,26 +81,41 @@ function Invoke-RScript {
         Unregister-Event -SourceIdentifier $errorEvent.Name
     }
 
+    $lineIndex = 0
+
     # Process output
     if ( $standardOutputBuffer.Count  ) {
-        $standardOutput = $standardOutputBuffer.Values -join "`r`n"
-        Write-Verbose "Process output: $standardOutput"
-        Write-Output $standardOutput
+        if ( $ParseOutput ) {
+            $standardOutputBuffer.Values | ForEach-Object {
+                $lineIndex += 1
+                $prefix = "[$lineIndex] "
+                if ( $_.StartsWith( $prefix ) ) {
+                    Write-Output $_.Substring( $prefix.Length ).Trim()
+                }
+            }
+        } else {
+            $standardOutput = $standardOutputBuffer.Values -join "`r`n"
+            Write-Output $standardOutput
+        }
     } else {
         Write-Verbose 'No process output'
     }
 
     # process error
-    if ( $standardErrorBuffer.Count -or $process.ExitCode ) {
+    if ( $standardErrorBuffer.Count ) {
         foreach ( $line in $standardErrorBuffer.Values ) {
             if ( $line ) {
                 Write-Warning $line -ErrorAction 'Continue'
             }
         }
-        Write-Error "Proccess failed ($processCall) after $( $process.TotalProcessorTime )."
     } else {
         Write-Verbose 'No process error output'
     }
+
+    if ( $process.ExitCode ) {
+        Write-Error "Proccess failed ($processCall) after $( $process.TotalProcessorTime )."
+    }
+
     if ( $Timeout -gt 0 -and $process.TotalProcessorTime.TotalSeconds -ge $Timeout ) {
         Write-Error "Process timed out ($processCall) after $( $process.TotalProcessorTime )."
     }
