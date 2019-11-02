@@ -17,6 +17,7 @@ You can run the build by:
 
 This project uses test scripts using [Pester](https://github.com/pester/Pester).
 For installation details see the instructions from the Pester project, but we recommend `Install-Module Pester -Scope CurrentUser`.
+The tests depend on the default installation of Microsoft R Open, that can be installed by `choco install microsoft-r-open`.
 
 You can run the tests by:
 

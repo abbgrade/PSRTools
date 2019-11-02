@@ -12,7 +12,7 @@ install:
   - ps: Install-Module InvokeBuild -Scope CurrentUser -Force
   - ps: Install-Module Pester -Scope CurrentUser -Force -SkipPublisherCheck
   - ps: Install-Module PlatyPS -Scope CurrentUser -Force
-  - docker version
+  - choco install microsoft-r-open
 
 platform:
   - x64
