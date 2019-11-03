@@ -29,3 +29,9 @@ For debugging tests change the working directory to ./src/test create the breakp
 ## Usage
 
 See the folder [docs](./docs) for examples.
+
+## Changelog
+
+### Version 0.1.0
+
+- New functions Install-RPackage, Get-RLibrary and Get-RVersion
