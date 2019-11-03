@@ -13,6 +13,9 @@ Describe 'Install-Package' {
         It 'installs logger' {
             Install-RPackage -Name 'logger'
         }
+        It 'installs from specified repository' {
+            Install-RPackage -Name 'logger' -Repository 'https://mran.microsoft.com/'
+        }
         It 'throws on install wrong package name' {
             {
                 Install-RPackage -Name 'wrong-package-name'

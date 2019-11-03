@@ -1,3 +1,6 @@
+Register-ArgumentCompleter -CommandName Install-RPackage -ParameterName Repository -ScriptBlock $RepositoryCompleter
+Register-ArgumentCompleter -CommandName Install-RPackage -ParameterName Library -ScriptBlock $LibraryCompleter
+
 function Install-Package {
 
     [CmdletBinding()]
@@ -7,23 +10,30 @@ function Install-Package {
         [string]
         $Name,
 
-        [ValidateNotNullOrEmpty()]
+        [ValidateScript( { Test-Path $_ -PathType Container })]
         [string]
         $Library,
 
         [ValidateNotNullOrEmpty()]
         [string]
-        $Repository
+        $Repository,
+
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $Snapshot
     )
 
     $parameter = @( "'$Name'" )
 
     if ( $Library ) {
-        $parameter.Add( "lib='$Library'" )
+        $parameter += @( "lib='$( $Library.Replace('\', '\\') )'" )
     }
 
     if ( $Repository ) {
-        $parameter.Add( "repos='$Repository'" )
+        if ( $Snapshot ) {
+            $Repository = "$Repository/snapshot/$Snapshot"
+        }
+        $parameter += @( "repos='$Repository'" )
     }
 
     Invoke-RScript """install.packages( $( $parameter -join ', ' ) )""", """library( '$Name' )""" -Timeout $null -WarningAction 'SilentlyContinue' -ErrorAction 'Stop'

@@ -5,19 +5,19 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-RVersion
+# Get-RLibrary
 
 ## SYNOPSIS
-Returns the version information from Rscript
+Get the configured lib paths
 
 ## SYNTAX
 
 ```
-Get-RVersion [<CommonParameters>]
+Get-RLibrary [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Executes \`Rscript --version\` and returns the result.
+Executes \`.libPaths()\` and returns the result.
 
 ## EXAMPLES
 
@@ -26,8 +26,9 @@ Executes \`Rscript --version\` and returns the result.
 Set-RScriptPath -Path 'C:\Program Files\Microsoft\R Open\R-3.5.2\bin\x64\Rscript.exe'
 ```
 
-PS C:\\\> Get-RVersion
-R scripting front-end version 3.5.2 (2018-12-20)
+PS C:\\\> Get-RLibrary
+C:/Users/USER/Documents/R/win-library/3.5
+C:/Program Files/Microsoft/R Open/R-3.5.2/library
 
 ## PARAMETERS
 
@@ -38,7 +39,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### string
+### string[]
 ## NOTES
 
 ## RELATED LINKS
