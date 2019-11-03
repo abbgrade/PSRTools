@@ -1,4 +1,4 @@
-version: '0.0.0.{build}'
+version: '0.1.0.{build}'
 
 environment:
   nuget_apikey:
@@ -6,13 +6,12 @@ environment:
 
 image:
  - Visual Studio 2017
- - Ubuntu
 
 install:
   - ps: Install-Module InvokeBuild -Scope CurrentUser -Force
   - ps: Install-Module Pester -Scope CurrentUser -Force -SkipPublisherCheck
   - ps: Install-Module PlatyPS -Scope CurrentUser -Force
-  - docker version
+  - choco install microsoft-r-open
 
 platform:
   - x64
