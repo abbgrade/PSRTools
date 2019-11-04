@@ -36,6 +36,6 @@ function Install-Package {
         $parameter += @( "repos='$Repository'" )
     }
 
-    Invoke-RScript """install.packages( $( $parameter -join ', ' ) )""", """library( '$Name' )""" -Timeout $null -WarningAction 'SilentlyContinue' -ErrorAction 'Stop'
+    Invoke-RScript "install.packages( $( $parameter -join ', ' ) )", "library( '$Name' )" -Timeout $null -WarningAction 'SilentlyContinue' -ErrorAction 'Stop'
 
 }

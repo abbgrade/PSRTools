@@ -32,7 +32,7 @@ function Invoke-RScript {
 
     $arguments = $ArgumentList | ForEach-Object {
         Write-Output '-e'
-        Write-Output $_
+        Write-Output """$( $_.Replace('"', '\"') )"""
     }
 
     # Configure process
