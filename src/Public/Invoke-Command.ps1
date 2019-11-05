@@ -11,6 +11,9 @@ function Invoke-Command {
     .PARAMETER Command
     Specifies the R command to be executes.
 
+    .PARAMETER Library
+    Specifies if a additinal package library should be included.
+
     .OUTPUTS
     string[]
 

@@ -5,25 +5,25 @@ online version:
 schema: 2.0.0
 ---
 
-# New-RPackage
+# New-RDocumentation
 
 ## SYNOPSIS
-Builds a R package
+Builds a R package documentation
 
 ## SYNTAX
 
 ```
-New-RPackage [-Path] <String> [[-Library] <String>] [<CommonParameters>]
+New-RDocumentation [-Path] <String> [[-Library] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Executes the devtools build function.
+Executes the devtools document function.
 
 ## EXAMPLES
 
 ### BEISPIEL 1
 ```
-New-RPackage ( Get-REscapedString '$PackagePath' )
+New-RDocumentation ( Get-REscapedString '$PackagePath' )
 ```
 
 ## PARAMETERS

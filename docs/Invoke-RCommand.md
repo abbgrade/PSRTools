@@ -13,7 +13,7 @@ Executes a R command
 ## SYNTAX
 
 ```
-Invoke-RCommand [-Command] <String> [<CommonParameters>]
+Invoke-RCommand [-Command] <String[]> [[-Library] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -35,12 +35,27 @@ hello world
 Specifies the R command to be executes.
 
 ```yaml
-Type: String
+Type: String[]
 Parameter Sets: (All)
 Aliases:
 
 Required: True
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Library
+Specifies if a additinal package library should be included.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
