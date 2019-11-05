@@ -17,7 +17,7 @@ Describe 'New-Package' {
 
             $packgeName = 'test'
             $packagePath = "$tempDirectory\$packgeName"
-            Invoke-RCommand "usethis::create_package('$( Get-REscapedPath $packagePath )')"
+            Invoke-RCommand "usethis::create_package('$( Get-REscapedString $packagePath )')"
 
         }
         It 'builds package' {

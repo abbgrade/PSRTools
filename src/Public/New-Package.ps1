@@ -1,5 +1,25 @@
 function New-Package {
 
+    <#
+
+    .SYNOPSIS
+    Builds a R package
+
+    .DESCRIPTION
+    Executes the devtools build function.
+
+    .PARAMETER Path
+    Specifies the path to the package source
+
+    .OUTPUTS
+    NULL
+
+    .EXAMPLE
+    PS C:\> New-RPackage ( Get-REscapedString '$PackagePath' )
+
+
+    #>
+
     [CmdletBinding()]
     param (
         [Parameter( Mandatory )]
