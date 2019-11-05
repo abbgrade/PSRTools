@@ -32,13 +32,14 @@ function Invoke-RScript {
 
     $arguments = $ArgumentList | ForEach-Object {
         Write-Output '-e'
-        Write-Output $_
+        Write-Output """$( $_.Replace('"', '\"') )"""
     }
 
     # Configure process
     $process = New-Object System.Diagnostics.Process
     $process.StartInfo.Filename = $RScriptPath
     $process.StartInfo.Arguments = $arguments
+    $process.StartInfo.WorkingDirectory = Get-Location
     $process.StartInfo.RedirectStandardOutput = $true
     $process.StartInfo.RedirectStandardError = $true
     $process.StartInfo.UseShellExecute = $false

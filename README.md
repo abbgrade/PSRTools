@@ -1,6 +1,14 @@
 # PSRTools
 
+This PowerShell Modules helps to integrate R into DevOps processes for continuous integration and continuous deployment.
+
 [![Build status](https://ci.appveyor.com/api/projects/status/wprgefs7vsaug8sv?svg=true)](https://ci.appveyor.com/project/abbgrade/psrtools)
+
+## Installation
+
+Install PSDocker from [PowerShell Gallery](https://www.powershellgallery.com/packages/psrtools) using a PowerShell command line:
+
+    Install-Module -Name PSRTools -Scope CurrentUser
 
 ## Build
 
@@ -17,7 +25,7 @@ You can run the build by:
 
 This project uses test scripts using [Pester](https://github.com/pester/Pester).
 For installation details see the instructions from the Pester project, but we recommend `Install-Module Pester -Scope CurrentUser`.
-The tests depend on the default installation of Microsoft R Open, that can be installed by `choco install microsoft-r-open`.
+The tests depend on the default installation of Microsoft R Open and RTools, that can be installed by `choco install microsoft-r-open` and `choco install rtools`.
 
 You can run the tests by:
 
@@ -31,6 +39,10 @@ For debugging tests change the working directory to ./src/test create the breakp
 See the folder [docs](./docs) for examples.
 
 ## Changelog
+
+### Version 0.2.0
+
+- New functions New-RPackage, Invoke-RCommand and Get-REscapedString
 
 ### Version 0.1.0
 

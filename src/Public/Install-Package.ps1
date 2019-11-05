@@ -3,6 +3,34 @@ Register-ArgumentCompleter -CommandName Install-RPackage -ParameterName Library 
 
 function Install-Package {
 
+    <#
+
+    .SYNOPSIS
+    Installs a R package
+
+    .DESCRIPTION
+    Installs a package from a specific repository and into a library and checks the success.
+
+    .PARAMETER Name
+    Specifies the name of the package
+
+    .PARAMETER Library
+    Specifies the destination directory of the package
+
+    .PARAMETER Repository
+    Specifies the URL of the repository
+
+    .PARAMETER Snapshot
+    Specifies a snapshot directory of the repository
+
+    .OUTPUTS
+    NULL
+
+    .EXAMPLE
+    PS C:\> Install-RPackage 'devtools'
+
+    #>
+
     [CmdletBinding()]
     param (
         [Parameter( Mandatory )]
@@ -26,7 +54,7 @@ function Install-Package {
     $parameter = @( "'$Name'" )
 
     if ( $Library ) {
-        $parameter += @( "lib='$( $Library.Replace('\', '\\') )'" )
+        $parameter += @( "lib='$( Get-REscapedString $Library )'" )
     }
 
     if ( $Repository ) {
@@ -36,6 +64,6 @@ function Install-Package {
         $parameter += @( "repos='$Repository'" )
     }
 
-    Invoke-RScript """install.packages( $( $parameter -join ', ' ) )""", """library( '$Name' )""" -Timeout $null -WarningAction 'SilentlyContinue' -ErrorAction 'Stop'
+    Invoke-RScript "install.packages( $( $parameter -join ', ' ) )", "library( '$Name' )" -Timeout $null -WarningAction 'SilentlyContinue' -ErrorAction 'Stop'
 
 }

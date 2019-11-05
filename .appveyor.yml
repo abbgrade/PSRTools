@@ -1,4 +1,4 @@
-version: '0.1.0.{build}'
+version: '0.2.0.{build}'
 
 environment:
   nuget_apikey:
@@ -12,6 +12,7 @@ install:
   - ps: Install-Module Pester -Scope CurrentUser -Force -SkipPublisherCheck
   - ps: Install-Module PlatyPS -Scope CurrentUser -Force
   - choco install microsoft-r-open
+  - choco install rtools
 
 platform:
   - x64
