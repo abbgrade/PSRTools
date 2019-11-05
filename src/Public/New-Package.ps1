@@ -24,12 +24,23 @@ function New-Package {
     param (
         [Parameter( Mandatory )]
         [ValidateScript({ Test-Path $_ -PathType Container })]
-        [string] $Path
+        [string] $Path,
+
+        [ValidateScript( { Test-Path $_ -PathType Container })]
+        [string] $Library
     )
+
+    $commands = @()
+
+    if ( $Library ) {
+        $commands += @( ".libPaths( c( .libPaths(), '$( Get-EscapedString $Library )' ) )" )
+    }
+
+    $commands += @( 'devtools::build()' )
 
     Push-Location $Path
     try {
-        Invoke-RScript 'devtools::build()' -Timeout $null
+        Invoke-RScript -ArgumentList $commands -Timeout $null
     }
     finally {
         Pop-Location
