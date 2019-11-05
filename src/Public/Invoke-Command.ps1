@@ -25,8 +25,20 @@ function Invoke-Command {
     param (
         [Parameter( Mandatory )]
         [ValidateNotNullOrEmpty()]
-        [string] $Command
+        [string[]] $Command,
+
+        [ValidateScript( { Test-Path $_ -PathType Container })]
+        [string] $Library
     )
 
-    Invoke-RScript $Command -Timeout $null -ParseOutput | ForEach-Object { $_.Trim('"') }
+
+    $commands = @()
+
+    if ( $Library ) {
+        $commands += @( Get-AddLibraryCommand $Library )
+    }
+
+    $commands += $Command
+
+    Invoke-RScript $commands -Timeout $null -ParseOutput | ForEach-Object { $_.Trim('"') }
 }

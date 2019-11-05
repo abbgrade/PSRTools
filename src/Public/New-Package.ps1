@@ -11,6 +11,9 @@ function New-Package {
     .PARAMETER Path
     Specifies the path to the package source
 
+    .PARAMETER Library
+    Specifies an additional library path that contains required R packages.
+
     .OUTPUTS
     NULL
 
@@ -33,7 +36,7 @@ function New-Package {
     $commands = @()
 
     if ( $Library ) {
-        $commands += @( ".libPaths( c( .libPaths(), '$( Get-EscapedString $Library )' ) )" )
+        $commands += @( Get-AddLibraryCommand $Library )
     }
 
     $commands += @( 'devtools::build()' )
