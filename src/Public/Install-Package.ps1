@@ -26,7 +26,7 @@ function Install-Package {
     $parameter = @( "'$Name'" )
 
     if ( $Library ) {
-        $parameter += @( "lib='$( $Library.Replace('\', '\\') )'" )
+        $parameter += @( "lib='$( Get-REscapedPath $Library )'" )
     }
 
     if ( $Repository ) {

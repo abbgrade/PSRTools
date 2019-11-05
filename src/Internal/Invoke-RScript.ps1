@@ -39,6 +39,7 @@ function Invoke-RScript {
     $process = New-Object System.Diagnostics.Process
     $process.StartInfo.Filename = $RScriptPath
     $process.StartInfo.Arguments = $arguments
+    $process.StartInfo.WorkingDirectory = Get-Location
     $process.StartInfo.RedirectStandardOutput = $true
     $process.StartInfo.RedirectStandardError = $true
     $process.StartInfo.UseShellExecute = $false
