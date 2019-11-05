@@ -1,6 +1,14 @@
 # PSRTools
 
+This PowerShell Modules helps to integrate R into DevOps processes for continuous integration and continuous deployment.
+
 [![Build status](https://ci.appveyor.com/api/projects/status/wprgefs7vsaug8sv?svg=true)](https://ci.appveyor.com/project/abbgrade/psrtools)
+
+## Installation
+
+Install PSDocker from [PowerShell Gallery](https://www.powershellgallery.com/packages/psrtools) using a PowerShell command line:
+
+    Install-Module -Name PSRTools -Scope CurrentUser
 
 ## Build
 
@@ -31,6 +39,10 @@ For debugging tests change the working directory to ./src/test create the breakp
 See the folder [docs](./docs) for examples.
 
 ## Changelog
+
+### Version 0.2.0
+
+- New functions New-RPackage, Invoke-RCommand and Get-REscapedString
 
 ### Version 0.1.0
 
