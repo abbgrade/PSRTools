@@ -12,6 +12,7 @@ install:
   - ps: Install-Module Pester -Scope CurrentUser -Force -SkipPublisherCheck
   - ps: Install-Module PlatyPS -Scope CurrentUser -Force
   - choco install microsoft-r-open
+  - choco install rtools
 
 platform:
   - x64
