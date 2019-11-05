@@ -1,5 +1,7 @@
 # PSRTools
 
+This PowerShell Modules helps to integrate R into DevOps processes for continuous integration and continuous deployment.
+
 [![Build status](https://ci.appveyor.com/api/projects/status/wprgefs7vsaug8sv?svg=true)](https://ci.appveyor.com/project/abbgrade/psrtools)
 
 ## Build
@@ -31,6 +33,10 @@ For debugging tests change the working directory to ./src/test create the breakp
 See the folder [docs](./docs) for examples.
 
 ## Changelog
+
+### Version 0.2.0
+
+- New functions New-RPackage, Invoke-RCommand and Get-REscapedString
 
 ### Version 0.1.0
 
