@@ -40,6 +40,10 @@ See the folder [docs](./docs) for examples.
 
 ## Changelog
 
+### Version 0.3.0
+
+- New function New-RDocumentation
+
 ### Version 0.2.0
 
 - New functions New-RPackage, Invoke-RCommand and Get-REscapedString
