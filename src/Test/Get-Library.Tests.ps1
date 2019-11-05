@@ -8,7 +8,7 @@ param (
 Describe 'Get-Library' {
     Context 'Configured RScript' {
         BeforeAll {
-            Set-RScriptPath -Path 'C:\Program Files\Microsoft\R Open\R-3.5.2\bin\x64\Rscript.exe'
+            Set-RScriptPath -Path $RScriptPath
         }
         It 'returns libraries' {
             Get-RLibrary | ForEach-Object {

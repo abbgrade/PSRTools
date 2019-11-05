@@ -8,7 +8,7 @@ schema: 2.0.0
 # Install-RPackage
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Installs a R package
 
 ## SYNTAX
 
@@ -18,36 +18,19 @@ Install-RPackage [-Name] <String> [[-Library] <String>] [[-Repository] <String>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Installs a package from a specific repository and into a library and checks the success.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### BEISPIEL 1
 ```
-
-{{ Add example description here }}
+Install-RPackage 'devtools'
+```
 
 ## PARAMETERS
 
-### -Library
-{{ Fill Library Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Name
-{{ Fill Name Description }}
+Specifies the name of the package
 
 ```yaml
 Type: String
@@ -55,14 +38,14 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Repository
-{{ Fill Repository Description }}
+### -Library
+Specifies the destination directory of the package
 
 ```yaml
 Type: String
@@ -76,8 +59,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Snapshot
-{{ Fill Snapshot Description }}
+### -Repository
+Specifies the URL of the repository
 
 ```yaml
 Type: String
@@ -91,16 +74,29 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Snapshot
+Specifies a snapshot directory of the repository
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### Keine
-
 ## OUTPUTS
 
-### System.Object
+### NULL
 ## NOTES
 
 ## RELATED LINKS

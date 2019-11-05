@@ -5,13 +5,13 @@ param (
 
 . $PSScriptRoot\TestHelper.ps1
 
-Describe 'Get-Version' {
+Describe 'Invoke-RCommand' {
     Context 'Configured RScript' {
         BeforeAll {
             Set-RScriptPath -Path $RScriptPath
         }
-        It 'returns the version' {
-            Get-RVersion | Should -BeLike '* version *'
+        It 'print hello world' {
+            Invoke-RCommand "print('hello world')" | Should -Be 'hello world'
         }
     }
 }
