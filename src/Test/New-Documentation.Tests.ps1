@@ -5,7 +5,7 @@ param (
 
 . $PSScriptRoot\TestHelper.ps1
 
-Describe 'New-Package' {
+Describe 'New-Documentation' {
     Context 'Configured RScript' {
         BeforeAll {
             Set-RScriptPath -Path $RScriptPath
