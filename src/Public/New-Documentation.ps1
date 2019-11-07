@@ -43,7 +43,7 @@ function New-Documentation {
 
     Push-Location $Path
     try {
-        Invoke-RScript -ArgumentList $commands -Timeout $null
+        Invoke-RScript -ArgumentList $commands -Timeout $null | Out-Null
     }
     finally {
         Pop-Location

@@ -54,4 +54,6 @@ function New-Package {
     finally {
         Pop-Location
     }
+
+    return $archivePath
 }

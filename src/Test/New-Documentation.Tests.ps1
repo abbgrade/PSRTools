@@ -9,21 +9,15 @@ Describe 'New-Documentation' {
     Context 'Configured RScript' {
         BeforeAll {
             Set-RScriptPath -Path $RScriptPath
-
             $tempDirectory = ( Get-Item 'TestDrive:\' ).FullName
+            $libPath = New-TempLibrary -TempDirectory $tempDirectory
+            $project = New-TestProject -TempDirectory $tempDirectory -Library $libPath
 
-            $libPath = "$tempDirectory\lib"
-            New-Item $libPath -ItemType Directory
-            Install-RPackage -Name 'usethis' -Library $libPath
             Install-RPackage -Name 'devtools' -Library $libPath
             Install-RPackage -Name 'roxygen2' -Library $libPath
-
-            $packagePath = "$tempDirectory\test"
-            Invoke-RCommand "usethis::create_package('$( Get-REscapedString $packagePath )')" -Library $libPath
-
         }
         It 'builds docs' {
-            New-RDocumentation -Path $packagePath -Library $libPath
+            New-RDocumentation -Path $project -Library $libPath
         }
     }
 }
