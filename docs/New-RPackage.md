@@ -18,6 +18,7 @@ New-RPackage [-Path] <String> [[-Library] <String>] [<CommonParameters>]
 
 ## DESCRIPTION
 Executes the devtools build function.
+Returns the path to the created package archive.
 
 ## EXAMPLES
 
@@ -65,7 +66,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### NULL
+### string
 ## NOTES
 
 ## RELATED LINKS

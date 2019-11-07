@@ -7,6 +7,7 @@ function New-Package {
 
     .DESCRIPTION
     Executes the devtools build function.
+    Returns the path to the created package archive.
 
     .PARAMETER Path
     Specifies the path to the package source
@@ -15,7 +16,7 @@ function New-Package {
     Specifies an additional library path that contains required R packages.
 
     .OUTPUTS
-    NULL
+    string
 
     .EXAMPLE
     PS C:\> New-RPackage ( Get-REscapedString '$PackagePath' )
@@ -43,7 +44,12 @@ function New-Package {
 
     Push-Location $Path
     try {
-        Invoke-RScript -ArgumentList $commands -Timeout $null
+        $archivePath = Invoke-RScript -ArgumentList $commands -Timeout $null -ParseOutput | ForEach-Object { $_.Trim('"') }
+        if ( Test-Path $archivePath -PathType Leaf ) {
+            Write-Verbose "Package $( ( Get-Item $archivePath ).Name ) was created."
+        } else {
+            throw "Package $( ( Get-Item $Path ).Name ) was not created."
+        }
     }
     finally {
         Pop-Location

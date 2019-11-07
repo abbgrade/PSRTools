@@ -20,6 +20,13 @@ Describe 'New-Package' {
             $packagePath = "$tempDirectory\test"
             Invoke-RCommand "usethis::create_package('$( Get-REscapedString $packagePath )')" -Library $libPath
         }
+
+        It 'builds package without devtools' {
+            {
+                New-RPackage -Path $packagePath
+            } | Should -Throw
+        }
+
         It 'builds package' {
             New-RPackage -Path $packagePath -Library $libPath
         }
