@@ -39,12 +39,13 @@ function Install-Package {
 
     [CmdletBinding()]
     param (
-        [Parameter( ParameterSetName='Local' )]
+        [Parameter( Mandatory, ParameterSetName='Local' )]
         [ValidateScript({ Test-Path $_ -PathType Leaf })]
         [string]
         $Path,
 
         [Parameter( Mandatory, ParameterSetName='Repository' )]
+        [Parameter( Mandatory, ParameterSetName='Local' )]
         [ValidateNotNullOrEmpty()]
         [string]
         $Name,
@@ -72,6 +73,9 @@ function Install-Package {
         Repository {
             $parameter = @( "'$Name'" )
         }
+        Local {
+            $parameter = @( "'$( Get-EscapedString $Path )'" )
+        }
     }
 
     if ( $Library ) {
@@ -93,6 +97,6 @@ function Install-Package {
     $commands += "install.packages( $( $parameter -join ', ' ) )"
     $commands += "library( '$Name' )"
 
-    Invoke-RScript $commands -Timeout $null -WarningAction 'SilentlyContinue' -ErrorAction 'Stop'
+    Invoke-RScript $commands -Timeout $null -WarningAction 'SilentlyContinue' -ErrorAction 'Stop' | Out-Null
 
 }
