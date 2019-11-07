@@ -5,23 +5,19 @@ param (
 
 . $PSScriptRoot\TestHelper.ps1
 
-Describe 'New-Package' {
+Describe 'New-Documentation' {
     Context 'Configured RScript' {
         BeforeAll {
             Set-RScriptPath -Path $RScriptPath
-
             $tempDirectory = ( Get-Item 'TestDrive:\' ).FullName
+            $libPath = New-TempLibrary -TempDirectory $tempDirectory
+            $project = New-TestProject -TempDirectory $tempDirectory -Library $libPath
 
-            Install-RPackage -Name 'usethis'
-            Install-RPackage -Name 'devtools'
-
-            $packgeName = 'test'
-            $packagePath = "$tempDirectory\$packgeName"
-            Invoke-RCommand "usethis::create_package('$( Get-REscapedString $packagePath )')"
-
+            Install-RPackage -Name 'devtools' -Library $libPath
+            Install-RPackage -Name 'roxygen2' -Library $libPath
         }
         It 'builds docs' {
-            New-RDocumentation -Path $packagePath
+            New-RDocumentation -Path $project -Library $libPath
         }
     }
 }

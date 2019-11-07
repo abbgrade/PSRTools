@@ -11,6 +11,9 @@ function New-Documentation {
     .PARAMETER Path
     Specifies the path to the package source
 
+    .PARAMETER Library
+    Specifies an additional library path that contains required R packages.
+
     .OUTPUTS
     NULL
 
@@ -24,12 +27,23 @@ function New-Documentation {
     param (
         [Parameter( Mandatory )]
         [ValidateScript({ Test-Path $_ -PathType Container })]
-        [string] $Path
+        [string] $Path,
+
+        [ValidateScript( { Test-Path $_ -PathType Container })]
+        [string] $Library
     )
+
+    $commands = @()
+
+    if ( $Library ) {
+        $commands += @( Get-AddLibraryCommand $Library )
+    }
+
+    $commands += @( 'devtools::document()' )
 
     Push-Location $Path
     try {
-        Invoke-RScript 'devtools::document()' -Timeout $null
+        Invoke-RScript -ArgumentList $commands -Timeout $null | Out-Null
     }
     finally {
         Pop-Location

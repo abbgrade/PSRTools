@@ -11,59 +11,92 @@ function Install-Package {
     .DESCRIPTION
     Installs a package from a specific repository and into a library and checks the success.
 
+    .PARAMETER Path
+    Specifies the local path of the package archive.
+
     .PARAMETER Name
-    Specifies the name of the package
+    Specifies the name of the package.
 
     .PARAMETER Library
-    Specifies the destination directory of the package
+    Specifies the destination directory of the package.
 
     .PARAMETER Repository
-    Specifies the URL of the repository
+    Specifies the URL of the repository.
 
     .PARAMETER Snapshot
-    Specifies a snapshot directory of the repository
+    Specifies a snapshot directory of the repository.
 
     .OUTPUTS
     NULL
 
     .EXAMPLE
-    PS C:\> Install-RPackage 'devtools'
+    PS C:\> Install-RPackage 'devtools'.
+
+    .EXAMPLE
+    PS C:\> Install-RPackage '.\devtools.tar.gz'.
 
     #>
 
     [CmdletBinding()]
     param (
-        [Parameter( Mandatory )]
+        [Parameter( Mandatory, ParameterSetName='Local' )]
+        [ValidateScript({ Test-Path $_ -PathType Leaf })]
+        [string]
+        $Path,
+
+        [Parameter( Mandatory, ParameterSetName='Repository' )]
+        [Parameter( Mandatory, ParameterSetName='Local' )]
         [ValidateNotNullOrEmpty()]
         [string]
         $Name,
 
+        [Parameter( ParameterSetName='Repository' )]
+        [Parameter( ParameterSetName='Local' )]
         [ValidateScript( { Test-Path $_ -PathType Container })]
         [string]
         $Library,
 
+        [Parameter( ParameterSetName='Repository' )]
         [ValidateNotNullOrEmpty()]
         [string]
         $Repository,
 
+        [Parameter( ParameterSetName='Repository' )]
         [ValidateNotNullOrEmpty()]
         [string]
         $Snapshot
     )
 
-    $parameter = @( "'$Name'" )
+    $commands = @()
+
+    switch ( $PSCmdlet.ParameterSetName ) {
+        Repository {
+            $parameter = @( "'$Name'" )
+        }
+        Local {
+            $parameter = @( "'$( Get-EscapedString $Path )'" )
+        }
+    }
 
     if ( $Library ) {
         $parameter += @( "lib='$( Get-REscapedString $Library )'" )
+        $commands += @( Get-AddLibraryCommand $Library )
     }
 
-    if ( $Repository ) {
-        if ( $Snapshot ) {
-            $Repository = "$Repository/snapshot/$Snapshot"
+    switch ( $PSCmdlet.ParameterSetName ) {
+        Repository {
+            if ( $Repository ) {
+                if ( $Snapshot ) {
+                    $Repository = "$Repository/snapshot/$Snapshot"
+                }
+                $parameter += @( "repos='$Repository'" )
+            }
         }
-        $parameter += @( "repos='$Repository'" )
     }
 
-    Invoke-RScript "install.packages( $( $parameter -join ', ' ) )", "library( '$Name' )" -Timeout $null -WarningAction 'SilentlyContinue' -ErrorAction 'Stop'
+    $commands += "install.packages( $( $parameter -join ', ' ) )"
+    $commands += "library( '$Name' )"
+
+    Invoke-RScript $commands -Timeout $null -WarningAction 'SilentlyContinue' -ErrorAction 'Stop' | Out-Null
 
 }

@@ -25,9 +25,9 @@ function Invoke-RScript {
     )
 
     if ( -not $RScriptPath ) {
-        Write-Error 'Path to Rscript.exe is not net. Please run Set-RScriptPath.'
+        throw 'Path to Rscript.exe is not net. Please run Set-RScriptPath.'
     } elseif ( -not ( Test-Path $RScriptPath -PathType Leaf )) {
-        Write-Error 'Path to Rscript.exe is invalid. Please re-run Set-RScriptPath.'
+        throw 'Path to Rscript.exe is invalid. Please re-run Set-RScriptPath.'
     }
 
     $arguments = $ArgumentList | ForEach-Object {
@@ -82,15 +82,15 @@ function Invoke-RScript {
         Unregister-Event -SourceIdentifier $errorEvent.Name
     }
 
-    $lineIndex = 0
+    $lineIndex = 1
 
     # Process output
     if ( $standardOutputBuffer.Count  ) {
         if ( $ParseOutput ) {
             $standardOutputBuffer.Values | ForEach-Object {
-                $lineIndex += 1
                 $prefix = "[$lineIndex] "
                 if ( $_.StartsWith( $prefix ) ) {
+                    $lineIndex += 1
                     Write-Output $_.Substring( $prefix.Length ).Trim()
                 }
             }
@@ -114,10 +114,8 @@ function Invoke-RScript {
     }
 
     if ( $process.ExitCode ) {
-        Write-Error "Proccess failed ($processCall) after $( $process.TotalProcessorTime )."
-    }
-
-    if ( $Timeout -gt 0 -and $process.TotalProcessorTime.TotalSeconds -ge $Timeout ) {
-        Write-Error "Process timed out ($processCall) after $( $process.TotalProcessorTime )."
+        throw "Proccess failed ($processCall) after $( $process.TotalProcessorTime )."
+    } elseif ( $Timeout -gt 0 -and $process.TotalProcessorTime.TotalSeconds -ge $Timeout ) {
+        throw "Process timed out ($processCall) after $( $process.TotalProcessorTime )."
     }
 }
