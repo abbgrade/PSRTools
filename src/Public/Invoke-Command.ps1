@@ -34,7 +34,6 @@ function Invoke-Command {
         [string] $Library
     )
 
-
     $commands = @()
 
     if ( $Library ) {
