@@ -12,13 +12,12 @@ Describe 'New-Package' {
 
             $tempDirectory = ( Get-Item 'TestDrive:\' ).FullName
 
-            $libPath = "$tempDirectory\lib"
-            New-Item $libPath -ItemType Directory
+            $libPath = New-TempLibrary -TempDirectory $tempDirectory
+
             Install-RPackage -Name 'usethis' -Library $libPath
             Install-RPackage -Name 'devtools' -Library $libPath
 
-            $packagePath = "$tempDirectory\test"
-            Invoke-RCommand "usethis::create_package('$( Get-REscapedString $packagePath )')" -Library $libPath
+            $packagePath = New-TestProject -TempDirectory $tempDirectory -Library $libPath
         }
 
         It 'builds package without devtools' {

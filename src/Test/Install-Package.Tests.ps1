@@ -21,5 +21,8 @@ Describe 'Install-Package' {
                 Install-RPackage -Name 'wrong-package-name'
             } | Should -Throw
         }
+        It 'installs from local package' {
+            Install-RPackage -Path 'test.tar.gz'
+        }
     }
 }
