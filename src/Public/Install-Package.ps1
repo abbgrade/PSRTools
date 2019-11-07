@@ -51,10 +51,12 @@ function Install-Package {
         $Snapshot
     )
 
+    $commands = @()
     $parameter = @( "'$Name'" )
 
     if ( $Library ) {
         $parameter += @( "lib='$( Get-REscapedString $Library )'" )
+        $commands += @( Get-AddLibraryCommand $Library )
     }
 
     if ( $Repository ) {
@@ -64,6 +66,9 @@ function Install-Package {
         $parameter += @( "repos='$Repository'" )
     }
 
-    Invoke-RScript "install.packages( $( $parameter -join ', ' ) )", "library( '$Name' )" -Timeout $null -WarningAction 'SilentlyContinue' -ErrorAction 'Stop'
+    $commands += "install.packages( $( $parameter -join ', ' ) )"
+    $commands += "library( '$Name' )"
+
+    Invoke-RScript $commands -Timeout $null -WarningAction 'SilentlyContinue' -ErrorAction 'Stop'
 
 }
