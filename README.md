@@ -40,6 +40,11 @@ See the folder [docs](./docs) for examples.
 
 ## Changelog
 
+### Version 0.4.0
+
+- Added Library parameter to existing cmdlets
+- Added installation of local package archives
+
 ### Version 0.3.0
 
 - New function New-RDocumentation
