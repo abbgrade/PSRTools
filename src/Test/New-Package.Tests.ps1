@@ -19,10 +19,9 @@ Describe 'New-Package' {
 
             $packagePath = "$tempDirectory\test"
             Invoke-RCommand "usethis::create_package('$( Get-REscapedString $packagePath )')" -Library $libPath
-
         }
         It 'builds package' {
-            New-RPackage -Path $packagePath
+            New-RPackage -Path $packagePath -Library $libPath
         }
     }
 }
