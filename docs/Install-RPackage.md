@@ -30,12 +30,12 @@ Installs a package from a specific repository and into a library and checks the 
 
 ### BEISPIEL 1
 ```
-Install-RPackage 'devtools'.
+Install-RPackage -Name 'devtools' -Repository 'https://mran.microsoft.com/' -Snapshot '2019-02-01'
 ```
 
 ### BEISPIEL 2
 ```
-Install-RPackage '.\devtools.tar.gz'.
+Install-RPackage -Path '.\devtools.tar.gz' -Library 'C:\Program Files\Microsoft\R Open\R-3.5.2\library'
 ```
 
 ## PARAMETERS

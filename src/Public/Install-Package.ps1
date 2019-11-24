@@ -30,10 +30,10 @@ function Install-Package {
     NULL
 
     .EXAMPLE
-    PS C:\> Install-RPackage 'devtools'.
+    PS C:\> Install-RPackage -Name 'devtools' -Repository 'https://mran.microsoft.com/' -Snapshot '2019-02-01'
 
     .EXAMPLE
-    PS C:\> Install-RPackage '.\devtools.tar.gz'.
+    PS C:\> Install-RPackage -Path '.\devtools.tar.gz' -Library 'C:\Program Files\Microsoft\R Open\R-3.5.2\library'
 
     #>
 
