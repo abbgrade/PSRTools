@@ -40,6 +40,10 @@ See the folder [docs](./docs) for examples.
 
 ## Changelog
 
+### Version 0.4.1
+
+- Updated docs for Install-Package.
+
 ### Version 0.4.0
 
 - Added Library parameter to existing cmdlets
