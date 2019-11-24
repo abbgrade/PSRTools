@@ -24,7 +24,7 @@ Returns the path to the created package archive.
 
 ### BEISPIEL 1
 ```
-New-RPackage -Path '$PackagePath'
+New-RPackage -Path $PackagePath
 ```
 
 ## PARAMETERS

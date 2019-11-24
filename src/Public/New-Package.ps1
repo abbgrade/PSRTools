@@ -19,7 +19,7 @@ function New-Package {
     string
 
     .EXAMPLE
-    PS C:\> New-RPackage -Path '$PackagePath'
+    PS C:\> New-RPackage -Path $PackagePath
 
 
     #>
