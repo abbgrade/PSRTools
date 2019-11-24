@@ -23,7 +23,7 @@ Executes the devtools document function.
 
 ### BEISPIEL 1
 ```
-New-RDocumentation ( Get-REscapedString '$PackagePath' )
+New-RDocumentation -Path $PackagePath
 ```
 
 ## PARAMETERS
