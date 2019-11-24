@@ -12,8 +12,14 @@ Installs a R package
 
 ## SYNTAX
 
+### Local
 ```
-Install-RPackage [-Name] <String> [[-Library] <String>] [[-Repository] <String>] [[-Snapshot] <String>]
+Install-RPackage -Path <String> -Name <String> [-Library <String>] [<CommonParameters>]
+```
+
+### Repository
+```
+Install-RPackage -Name <String> [-Library <String>] [-Repository <String>] [-Snapshot <String>]
  [<CommonParameters>]
 ```
 
@@ -24,13 +30,33 @@ Installs a package from a specific repository and into a library and checks the 
 
 ### BEISPIEL 1
 ```
-Install-RPackage 'devtools'
+Install-RPackage -Name 'devtools' -Repository 'https://mran.microsoft.com/' -Snapshot '2019-02-01'
+```
+
+### BEISPIEL 2
+```
+Install-RPackage -Path '.\devtools.tar.gz' -Library 'C:\Program Files\Microsoft\R Open\R-3.5.2\library'
 ```
 
 ## PARAMETERS
 
+### -Path
+Specifies the local path of the package archive.
+
+```yaml
+Type: String
+Parameter Sets: Local
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Name
-Specifies the name of the package
+Specifies the name of the package.
 
 ```yaml
 Type: String
@@ -38,14 +64,14 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 1
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Library
-Specifies the destination directory of the package
+Specifies the destination directory of the package.
 
 ```yaml
 Type: String
@@ -53,37 +79,37 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Repository
-Specifies the URL of the repository
+Specifies the URL of the repository.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: Repository
 Aliases:
 
 Required: False
-Position: 3
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Snapshot
-Specifies a snapshot directory of the repository
+Specifies a snapshot directory of the repository.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: Repository
 Aliases:
 
 Required: False
-Position: 4
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

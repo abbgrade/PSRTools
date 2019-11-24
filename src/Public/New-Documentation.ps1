@@ -18,8 +18,7 @@ function New-Documentation {
     NULL
 
     .EXAMPLE
-    PS C:\> New-RDocumentation ( Get-REscapedString '$PackagePath' )
-
+    PS C:\> New-RDocumentation -Path $PackagePath
 
     #>
 
