@@ -13,6 +13,12 @@ install:
   - ps: Install-Module PlatyPS -Scope CurrentUser -Force
   - choco install microsoft-r-open
   - choco install rtools
+  - ps: |
+    # Add R Open to PATH variable
+    $rPath = ( Get-Item 'C:\Program Files\Microsoft\R Open\R-*\bin\x64' | Sort-Object -Descending | Select-Object -First 1 ).FullName
+    if ( -not ( [System.Environment]::GetEnvironmentVariable('PATH', [System.EnvironmentVariableTarget]::User) -split ';' ) -contains $rPath ) {
+        $env:Path += ";$rPath"
+    }
 
 platform:
   - x64
