@@ -2,6 +2,8 @@
 
 This PowerShell Modules helps to integrate R into DevOps processes for continuous integration and continuous deployment.
 
+Please submit issues and feedback in the [GitHub Project Page](https://github.com/abbgrade/PSRTools).
+
 [![Build status](https://ci.appveyor.com/api/projects/status/wprgefs7vsaug8sv?svg=true)](https://ci.appveyor.com/project/abbgrade/psrtools)
 
 ## Installation
